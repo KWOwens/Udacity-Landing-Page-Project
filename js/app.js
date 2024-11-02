@@ -22,7 +22,7 @@
  * Define Global Variables
  *
  */
-const navItems = document.getElementById("navbar_litst");
+const navItems = document.getElementById("navbar_list");
 const sections = document.querySelectorAll("section");
 
 /**
