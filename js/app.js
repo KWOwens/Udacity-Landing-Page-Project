@@ -24,7 +24,7 @@
  */
 const navItems = document.getElementById("navbar_list");
 const sections = document.querySelectorAll("section");
-
+const mobileScreenSize = 768;
 /**
  * End Global Variables
  * Start Helper Functions
