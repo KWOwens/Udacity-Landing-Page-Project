@@ -30,7 +30,38 @@ const sections = document.querySelectorAll("section");
  * Start Helper Functions
  *
  */
+function createNavItem(section) {
+	const listItem = document.createElement("li");
+	const link = document.createElement("a");
 
+	const sectionName = section.getAttribute("data-nav");
+	const sectionId = section.id;
+
+	link.href = "#" + sectionId;
+	link.className = "menu__link";
+	link.textContent = sectionName;
+	link.style.padding = "1rem";
+
+	listItem.appendChild(link);
+
+	return {
+		listItem: listItem,
+		link: link,
+	};
+}
+
+function isInViewport(section) {
+	const rect = section.getBoundingClientRect();
+	const viewportHeight = window.innerHeight;
+
+	let activeArea;
+	if (window.innerWidth <= mobileScreeSize) {
+		activeArea = viewportHeight / 4;
+	} else {
+		activeArea = viewportHeight / 3;
+	}
+	return rect.top >= -activeArea && rect.top <= activeArea;
+}
 /**
  * End Helper Functions
  * Begin Main Functions
