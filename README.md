@@ -1,5 +1,8 @@
 # Landing Page Project
 
+This landing page project is the last requirement in the Udacity Front-End Nanodegree program.
+It is to demonstrate student's basic knowledge and skills learned in JavaScript and DOM manipulation.
+
 ## Table of Contents
 
 - [Description](#description)
