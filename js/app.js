@@ -22,7 +22,7 @@
  * Define Global Variables
  *
  */
-const navItems = document.getElementById("navbar_list");
+const navItems = document.getElementById("navbar__list");
 const sections = document.querySelectorAll("section");
 const mobileScreenSize = 768;
 /**
@@ -113,7 +113,7 @@ function scrollToSection(event) {
 
 	if (isMobileDevice()) {
 		setTimeout(function () {
-			targetSection.scrollIntoView({ behaviour: "smooth" });
+			targetSection.scrollIntoView({ behavior: "smooth" });
 		}, 100);
 	} else {
 		targetSection.scrollIntoView({ behavior: "smooth" });
