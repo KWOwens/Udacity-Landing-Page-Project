@@ -55,7 +55,7 @@ function isInViewport(section) {
 	const viewportHeight = window.innerHeight;
 
 	let activeArea;
-	if (window.innerWidth <= mobileScreeSize) {
+	if (window.innerWidth <= mobileScreenSize) {
 		activeArea = viewportHeight / 4;
 	} else {
 		activeArea = viewportHeight / 3;
@@ -75,7 +75,7 @@ function isMobileDevice() {
 // build the nav
 function buildNav() {
 	sections.forEach(function (section) {
-		const navElements = createNaveItem(section);
+		const navElements = createNavItem(section);
 
 		if (isMobileDevice()) {
 			navElements.link.style.display = "block";
@@ -140,7 +140,7 @@ window.addEventListener("scroll", setActiveSection);
 window.addEventListener("resize", function () {
 	setActiveSection();
 
-	if (navItems.replaceChildren.length === 0) {
+	if (navItems.Children.length === 0) {
 		buildNav();
 	}
 });
