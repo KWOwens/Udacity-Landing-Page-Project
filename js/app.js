@@ -24,7 +24,7 @@
  */
 const navItems = document.getElementById("navbar__list");
 const sections = document.querySelectorAll("section");
-const mobileScreenSize = 768;	//defines screen size for mobile
+const mobileScreenSize = 768; //defines screen size for mobile
 /**
  * End Global Variables
  * Start Helper Functions
@@ -39,7 +39,7 @@ function createNavItem(section) {
 
 	link.href = "#" + sectionId;
 	link.className = "menu__link"; //css class to style links
-	link.textContent = sectionName; 
+	link.textContent = sectionName;
 	link.style.padding = "1rem";
 
 	listItem.appendChild(link);
@@ -52,17 +52,17 @@ function createNavItem(section) {
 
 //checks if a section is visible in the viewport
 function isInViewport(section) {
-	const rect = section.getBoundingClientRect();	//gets the size and position of section relative to viewport
+	const rect = section.getBoundingClientRect(); //gets the size and position of section relative to viewport
 	const viewportHeight = window.innerHeight;
 
 	//determines how much of the section needs to be visible
-	let activeArea;	
+	let activeArea;
 	if (window.innerWidth <= mobileScreenSize) {
 		activeArea = viewportHeight / 4;
 	} else {
 		activeArea = viewportHeight / 3;
 	}
-	return rect.top >= -activeArea && rect.top <= activeArea;	//returns true if section is in active viewing area
+	return rect.top >= -activeArea && rect.top <= activeArea; //returns true if section is in active viewing area
 }
 
 //checks if a device is mobile based on screen width
@@ -79,14 +79,14 @@ function isMobileDevice() {
 //builds navigation menu for the sections
 function buildNav() {
 	sections.forEach(function (section) {
-		const navElements = createNavItem(section);	//creates navigation item for current section
+		const navElements = createNavItem(section); //creates navigation item for current section
 
 		if (isMobileDevice()) {
 			navElements.link.style.display = "block";
 			navElements.link.style.width = "100%";
 		}
 
-		navItems.appendChild(navElements.listItem);	//adds the new nav item to the menu
+		navItems.appendChild(navElements.listItem); //adds the new nav item to the menu
 	});
 }
 
@@ -100,9 +100,9 @@ function setActiveSection() {
 				allSections.classList.remove("active-area");
 			});
 
-			section.classList.add("active-area");	//adds 'active-area' class to the current section
-						
-			const currentLink = document.querySelector('a[href="#' + section.id + '"]');	//finds nav link that corresponds to the section
+			section.classList.add("active-area"); //adds 'active-area' class to the current section
+
+			const currentLink = document.querySelector('a[href="#' + section.id + '"]'); //finds nav link that corresponds to the section
 			if (currentLink) {
 				currentLink.classList.add("active");
 			}
@@ -113,19 +113,19 @@ function setActiveSection() {
 // Scroll to anchor ID using scrollTO event
 
 //function for smooth scrolling
-function scrollToSection(event) {	
-	event.preventDefault();	//prevents default anchor click behavior
+function scrollToSection(event) {
+	event.preventDefault(); //prevents default anchor click behavior
 
-	const targetId = event.target.getAttribute("href").slice(1);	//gets target section's ID from clicked link
-	const targetSection = document.getElementById(targetId);	//finds target section
-	
+	const targetId = event.target.getAttribute("href").slice(1); //gets target section's ID from clicked link
+	const targetSection = document.getElementById(targetId); //finds target section
+
 	//controls smooth scrolling for mobile devices
 	if (isMobileDevice()) {
 		setTimeout(function () {
 			targetSection.scrollIntoView({ behavior: "smooth" });
 		}, 100);
 	} else {
-		targetSection.scrollIntoView({ behavior: "smooth" });	//smooth scroll for desktop
+		targetSection.scrollIntoView({ behavior: "smooth" }); //smooth scroll for desktop
 	}
 }
 /**
@@ -140,18 +140,23 @@ buildNav();
 
 //adds event listeners to navigation menu links
 document.querySelectorAll(".menu__link").forEach(function (link) {
-	link.addEventListener("click", scrollToSection);	//adds click event for desktop mouse interacion
-	link.addEventListener("touchend", function (event) {	//adds touchend event for mobile touch devices
+	link.addEventListener("click", scrollToSection); //adds click event for desktop mouse interacion
+	link.addEventListener("touchend", function (event) {
+		//adds touchend event for mobile touch devices
 		scrollToSection(event);
 	});
 });
 
 // Set sections as active
-window.addEventListener("scroll", setActiveSection);	//monitors scrolling to update active-section higlighting
-window.addEventListener("resize", function () {	//handles window resizing events
+window.addEventListener("scroll", setActiveSection); //monitors scrolling to update active-section higlighting
+window.addEventListener("resize", function () {
+	//handles window resizing events
 	setActiveSection();
 
-	if (navItems.children.length === 0) {	//checks if nav item exists
+	if (navItems.children.length === 0) {
+		//checks if nav item exists
 		buildNav();
 	}
 });
+
+//Reference Sites: W3 Schools, MDN Web Docs, Google, SheCodes, YouTube, FreeCodeCamp
