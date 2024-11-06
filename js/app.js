@@ -24,7 +24,7 @@
  */
 const navItems = document.getElementById("navbar__list");
 const sections = document.querySelectorAll("section");
-const mobileScreenSize = 768;
+const mobileScreenSize = 768;	//defines screen size for mobile
 /**
  * End Global Variables
  * Start Helper Functions
@@ -38,8 +38,8 @@ function createNavItem(section) {
 	const sectionId = section.id;
 
 	link.href = "#" + sectionId;
-	link.className = "menu__link";
-	link.textContent = sectionName;
+	link.className = "menu__link"; //css class to style links
+	link.textContent = sectionName; 
 	link.style.padding = "1rem";
 
 	listItem.appendChild(link);
@@ -50,19 +50,22 @@ function createNavItem(section) {
 	};
 }
 
+//checks if a section is visible in the viewport
 function isInViewport(section) {
-	const rect = section.getBoundingClientRect();
+	const rect = section.getBoundingClientRect();	//gets the size and position of section relative to viewport
 	const viewportHeight = window.innerHeight;
 
-	let activeArea;
+	//determines how much of the section needs to be visible
+	let activeArea;	
 	if (window.innerWidth <= mobileScreenSize) {
 		activeArea = viewportHeight / 4;
 	} else {
 		activeArea = viewportHeight / 3;
 	}
-	return rect.top >= -activeArea && rect.top <= activeArea;
+	return rect.top >= -activeArea && rect.top <= activeArea;	//returns true if section is in active viewing area
 }
 
+//checks if a device is mobile based on screen width
 function isMobileDevice() {
 	return window.innerWidth <= mobileScreenSize;
 }
@@ -73,20 +76,23 @@ function isMobileDevice() {
  *
  */
 // build the nav
+//builds navigation menu for the sections
 function buildNav() {
 	sections.forEach(function (section) {
-		const navElements = createNavItem(section);
+		const navElements = createNavItem(section);	//creates navigation item for current section
 
 		if (isMobileDevice()) {
 			navElements.link.style.display = "block";
 			navElements.link.style.width = "100%";
 		}
 
-		navItems.appendChild(navElements.listItem);
+		navItems.appendChild(navElements.listItem);	//adds the new nav item to the menu
 	});
 }
 
 // Add class 'active' to section when near top of viewport
+
+//highlights the active-section and the link that corresponds
 function setActiveSection() {
 	sections.forEach(function (section) {
 		if (isInViewport(section)) {
@@ -94,9 +100,9 @@ function setActiveSection() {
 				allSections.classList.remove("active-area");
 			});
 
-			section.classList.add("active-area");
-
-			const currentLink = document.querySelector('a[href="#' + section.id + '"]');
+			section.classList.add("active-area");	//adds 'active-area' class to the current section
+						
+			const currentLink = document.querySelector('a[href="#' + section.id + '"]');	//finds nav link that corresponds to the section
 			if (currentLink) {
 				currentLink.classList.add("active");
 			}
@@ -105,18 +111,21 @@ function setActiveSection() {
 }
 
 // Scroll to anchor ID using scrollTO event
-function scrollToSection(event) {
-	event.preventDefault();
 
-	const targetId = event.target.getAttribute("href").slice(1);
-	const targetSection = document.getElementById(targetId);
+//function for smooth scrolling
+function scrollToSection(event) {	
+	event.preventDefault();	//prevents default anchor click behavior
 
+	const targetId = event.target.getAttribute("href").slice(1);	//gets target section's ID from clicked link
+	const targetSection = document.getElementById(targetId);	//finds target section
+	
+	//controls smooth scrolling for mobile devices
 	if (isMobileDevice()) {
 		setTimeout(function () {
 			targetSection.scrollIntoView({ behavior: "smooth" });
 		}, 100);
 	} else {
-		targetSection.scrollIntoView({ behavior: "smooth" });
+		targetSection.scrollIntoView({ behavior: "smooth" });	//smooth scroll for desktop
 	}
 }
 /**
@@ -128,19 +137,21 @@ function scrollToSection(event) {
 buildNav();
 
 // Scroll to section on link click
+
+//adds event listeners to navigation menu links
 document.querySelectorAll(".menu__link").forEach(function (link) {
-	link.addEventListener("click", scrollToSection);
-	link.addEventListener("touchend", function (event) {
+	link.addEventListener("click", scrollToSection);	//adds click event for desktop mouse interacion
+	link.addEventListener("touchend", function (event) {	//adds touchend event for mobile touch devices
 		scrollToSection(event);
 	});
 });
 
 // Set sections as active
-window.addEventListener("scroll", setActiveSection);
-window.addEventListener("resize", function () {
+window.addEventListener("scroll", setActiveSection);	//monitors scrolling to update active-section higlighting
+window.addEventListener("resize", function () {	//handles window resizing events
 	setActiveSection();
 
-	if (navItems.Children.length === 0) {
+	if (navItems.children.length === 0) {	//checks if nav item exists
 		buildNav();
 	}
 });
