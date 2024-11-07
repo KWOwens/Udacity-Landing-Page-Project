@@ -85,6 +85,18 @@ section {
 	transition: ease 0.3s all;
 }
 
+.menu__link.active-nav {
+	background-color: #333;
+	color: #fff;
+	border-radius: 4px;
+	transition: all 0.2s ease-in-out;
+}
+
+/* Section Highlight Styling*/
+.active-area {
+	background-color: rgb(66, 58, 58);
+}
+
 /* Header Styles */
 .page__header {
 	background: #fff;

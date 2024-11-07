@@ -94,9 +94,13 @@ function buildNav() {
 
 //highlights the active-section and the link that corresponds
 function setActiveSection() {
+	const allNavLinks = document.querySelectorAll(".menu__link"); //removes all active classes
+	allNavLinks.forEach((link) => link.classList.remove("active-nav"));
+
 	sections.forEach(function (section) {
 		if (isInViewport(section)) {
 			sections.forEach(function (allSections) {
+				//removes active class from all sections
 				allSections.classList.remove("active-area");
 			});
 
@@ -104,7 +108,7 @@ function setActiveSection() {
 
 			const currentLink = document.querySelector('a[href="#' + section.id + '"]'); //finds nav link that corresponds to the section
 			if (currentLink) {
-				currentLink.classList.add("active");
+				currentLink.classList.add("active-nav");
 			}
 		}
 	});
@@ -118,6 +122,12 @@ function scrollToSection(event) {
 
 	const targetId = event.target.getAttribute("href").slice(1); //gets target section's ID from clicked link
 	const targetSection = document.getElementById(targetId); //finds target section
+
+	//removes active class from all nav links
+	const allNavLinks = document.querySelectorAll(".menu__link");
+	allNavLinks.forEach((link) => link.classList.remove("active-nav"));
+
+	event.target.classList.add("active-nav"); //adds active class to clicked nav link
 
 	//controls smooth scrolling for mobile devices
 	if (isMobileDevice()) {
